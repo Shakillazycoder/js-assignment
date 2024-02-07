@@ -48,7 +48,7 @@ function password(obj) {
   ) {
     return "invalid";
   }
-  const site = obj.siteName.charAt(0).toUpperCase() + obj.siteName.slice(1);
+  const site = obj.siteName[0].toUpperCase() + obj.siteName.slice(1);
 
   const password = site + "#" + obj.name + "@" + obj.birthYear;
 

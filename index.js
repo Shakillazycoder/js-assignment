@@ -1,5 +1,3 @@
-let p = console.log.bind();
-
 function calculateMoney(ticketSale) {
   if (ticketSale < 0) {
     return "Please input a positive number";
@@ -24,21 +22,60 @@ function checkName(name) {
   const lowerCaseName = name.toLowerCase();
   if (letter.includes(lowerCaseName[lowerCaseName.length - 1])) {
     return "Good Name";
-  }else{
+  } else {
     return "Bad Name";
   }
-  
 }
 
 function deleteInvalids(array) {
-    if (!Array.isArray(array)){
-        return 'Invalid Array'
+  if (!Array.isArray(array)) {
+    return "Invalid Array";
+  }
+  let valid = [];
+  for (const arr of array) {
+    if (typeof arr === "number" && !isNaN(arr)) {
+      valid.push(arr);
     }
-    let valid = []
-    for(const arr of array){
-        if(typeof arr === 'number' && !isNaN(arr)){
-           valid.push(arr)
-        }
+  }
+  return valid;
+}
+
+function password(obj) {
+  if (
+    typeof obj !== "object" || !obj.name || !obj.birthYear || !obj.siteName ||
+    typeof obj.birthYear !== "number" ||
+    obj.birthYear.toString().length !== 4
+  ) {
+    return "invalid";
+  }
+  const site = obj.siteName.charAt(0).toUpperCase() + obj.siteName.slice(1);
+
+  const password = site + "#" + obj.name + "@" + obj.birthYear;
+
+  return password;
+}
+
+function monthlySavings(arr , livingCost) {
+
+if (!Array.isArray(arr) || typeof livingCost !== "number"){
+    return 'invalid input'
+}
+let totalIncome = 0;
+for(const array of arr){
+    if(array >= 3000){
+        const reduceTaxAbove3000 = array- (array * 20 / 100);
+        totalIncome = totalIncome + reduceTaxAbove3000;
+    } 
+    else{
+        totalIncome = totalIncome + array;
     }
-     return valid;
-    }
+}
+
+const saving = totalIncome - livingCost;
+
+if(saving < 0){
+    return 'earn more'
+}
+return saving;
+
+}
